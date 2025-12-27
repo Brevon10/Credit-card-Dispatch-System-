@@ -1,0 +1,58 @@
+﻿<!-- Views/Home/CardDispatchDashboard.cshtml -->
+@{
+    ViewData["Title"] = "Card Dispatch Dashboard";
+}
+
+<div class="dashboard-section">
+    <h2>Filter Data</h2>
+    <form method="post">
+        <div class="form-grid">
+            <div class="form-item">
+                <label for="from-date">From Date:</label>
+                <div class="input-with-icon">
+                    <input type="date" id="from-date" name="FromDate" class="large-input" value="2024-08-02" />
+
+                </div>
+            </div>
+            <div class="form-item">
+                <label for="to-date">To Date:</label>
+                <div class="input-with-icon">
+                    <input type="date" id="to-date" name="ToDate" class="large-input" value="2024-08-02" />
+                    
+                </div>
+            </div>
+            <div class="form-item">
+                <label for="status">Status:</label>
+                <select id="status" name="Status" class="large-select">
+                    <option value="">--SELECT--</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+        </div>
+        <div class="button-group">
+            <button type="submit" class="large-btn primary-btn"><i class="fas fa-arrow-right"></i> Submit</button>
+            <button type="reset" class="large-btn reset-btn"><i class="fas fa-undo"></i> Reset</button>
+        </div>
+    </form>
+</div>
+<div class="dashboard-section">
+    <h2>Dispatch Data</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Logo</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Product Code</th>
+                <th>Total Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Dynamic data here -->
+        </tbody>
+    </table>
+    <div class="button-group">
+        <button type="button" class="large-btn download-btn"><i class="fas fa-download"></i> Download</button>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿@model CardDispatch.Models.CardDispatchModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="welcome-section">
+    <h2>Welcome to Card Dispatch</h2>
+    <p>Manage your card dispatch operations with Bank of Baroda.</p>
+</div>
+
+@if (ViewBag.Message != null)
+{
+    <div class="message-box">
+        <p>@ViewBag.Message</p>
+    </div>
+}
+
+<form asp-action="Submit" asp-controller="Dashboard" method="post">
+    <div class="filter-section">
+        <div class="input-group">
+            <label>From Date:</label>
+            <input type="date" name="FromDate" required />
+        </div>
+        <div class="input-group">
+            <label>To Date:</label>
+            <input type="date" name="ToDate" required />
+        </div>
+        <div class="input-group">
+            <label>Status:</label>
+            <select name="Status">
+                <option value="">--SELECT--</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Logo:</label>
+            <select name="Logo">
+                <option value="">--SELECT--</option>
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Zone:</label>
+            <select name="Zone">
+                <option value="">--SELECT--</option>
+                <option value="zone1">Zone1</option>
+                <option value="zone2">Zone2</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Region:</label>
+            <select name="Region">
+                <option value="">--SELECT--</option>
+                <option value="mumbai">Mumbai</option>
+                <option value="thane">Thane</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <button type="submit"><i class="fas fa-check"></i> Submit</button>
+            <button type="reset" class="reset"><i class="fas fa-times"></i> Reset</button>
+        </div>
+    </div>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color:green;">@ViewBag.Message</p>
+
+    <form asp-action="DownloadCsv" method="post">
+        @* Hidden fields to retain submitted values *@
+        <input type="hidden" name="FromDate" value="@Model.FromDate.ToString("yyyy-MM-dd")" />
+        <input type="hidden" name="ToDate" value="@Model.ToDate.ToString("yyyy-MM-dd")" />
+        <input type="hidden" name="Region" value="@Model.Region" />
+        <input type="hidden" name="Logo" value="@Model.Logo" />
+        <input type="hidden" name="CampaignCode" value="@Model.CampaignCode" />
+        <input type="hidden" name="Status" value="@Model.Status" />
+        <input type="hidden" name="TotalCampaignCount" value="@Model.TotalCampaignCount" />
+        <input type="hidden" name="Zone" value="@Model.Zone" />
+        <input type="hidden" name="ProductDescription" value="@Model.ProductDescription" />
+        <input type="hidden" name="ProductCode" value="@Model.ProductCode" />
+        <input type="hidden" name="AlphaCode" value="@Model.AlphaCode" />
+        <input type="hidden" name="BranchName" value="@Model.BranchName" />
+        <input type="hidden" name="TotalCount" value="@Model.TotalCount" />
+
+        <button type="submit">Download CSV</button>
+    </form>
+}
+
+<div class="data-section">
+    <h2>Dashboard Data</h2>
+
+    @if (Model != null && Model.FromDate != default(DateTime))
+    {
+        <div class="submitted-values">
+            <p><strong>From Date:</strong> @Model.FromDate.ToString("yyyy-MM-dd")</p>
+            <p><strong>To Date:</strong> @Model.ToDate.ToString("yyyy-MM-dd")</p>
+            <p><strong>Status:</strong> @Model.Status</p>
+            <p><strong>Logo:</strong> @Model.Logo</p>
+            <p><strong>Zone:</strong> @Model.Zone</p>
+            <p><strong>Region:</strong> @Model.Region</p>
+            <p><strong>Campaign Code:</strong> @Model.CampaignCode</p>
+            <p><strong>Total Campaign Count:</strong> @Model.TotalCampaignCount</p>
+            <p><strong>Product Description:</strong> @Model.ProductDescription</p>
+            <p><strong>Product Code:</strong> @Model.ProductCode</p>
+            <p><strong>Alpha Code:</strong> @Model.AlphaCode</p>
+            <p><strong>Branch Name:</strong> @Model.BranchName</p>
+            <p><strong>Total Count:</strong> @Model.TotalCount</p>
+        </div>
+    }
+    
+</div>
+
